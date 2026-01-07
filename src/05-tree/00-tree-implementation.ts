@@ -26,6 +26,14 @@ class TreeNode {
 
         console.log(log);
     }
+
+    dfs (node: TreeNode | null) {
+        if (node) {
+            console.log(node.val);
+            this.dfs(node.left);
+            this.dfs(node.right);
+        }
+    }
 }
 
 export default TreeNode;
