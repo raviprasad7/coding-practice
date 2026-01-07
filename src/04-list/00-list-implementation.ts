@@ -6,6 +6,10 @@ class ListNode {
         this.next = (next===undefined ? null : next)
     }
 
+    addNext(next: ListNode | null) {
+        this.next = next;
+    }
+
     printList () {
         let ptr = this as ListNode | null;
         let log = '';
