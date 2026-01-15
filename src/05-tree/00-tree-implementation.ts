@@ -2,6 +2,12 @@ class TreeNode {
     val: number
     left: TreeNode | null
     right: TreeNode | null
+    static DFS_MODES: { [key: string]: string } = {
+        PREORDER: 'PREORDER',
+        INORDER: 'INORDER',
+        POSTORDER: 'POSTORDER',
+    }
+
     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
         this.val = (val===undefined ? 0 : val)
         this.left = (left===undefined ? null : left)
@@ -9,7 +15,7 @@ class TreeNode {
     }
 
     bfs () {
-        let ptr = this as TreeNode | null;
+        let ptr = this as TreeNode;
         const queue: (TreeNode|null)[] = [];
         let log = '';
 
@@ -27,12 +33,30 @@ class TreeNode {
         console.log(log);
     }
 
-    dfs (node: TreeNode | null) {
-        if (node) {
-            console.log(node.val);
-            this.dfs(node.left);
-            this.dfs(node.right);
-        }
+    dfs (mode = TreeNode.DFS_MODES.INORDER) {
+        const recurse = (node: TreeNode | null) => {
+            if (!node) return;
+
+            switch (mode) {
+                case TreeNode.DFS_MODES.PREORDER:
+                    console.log(node.val);
+                    recurse(node.left);
+                    recurse(node.right);
+                    break;
+                case TreeNode.DFS_MODES.INORDER:
+                    recurse(node.left);
+                    console.log(node.val);
+                    recurse(node.right);
+                    break;
+                case TreeNode.DFS_MODES.POSTORDER:
+                    recurse(node.left);
+                    recurse(node.right);
+                    console.log(node.val);
+                    break;
+            }
+        };
+
+        recurse(this);
     }
 }
 
