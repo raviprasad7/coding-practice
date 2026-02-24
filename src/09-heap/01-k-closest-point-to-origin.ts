@@ -1,5 +1,14 @@
-function kClosest(points: number[][], k: number): number[][] {
+import Heap from './00-heap-implementation';
 
+function kClosest(points: number[][], k: number): number[][] {
+	const result: number[][] = [];
+	const heap = new Heap<number>();
+
+	for (const point of points) {
+		heap.push(point);
+	}
+
+	return result;
 };
 
 {
