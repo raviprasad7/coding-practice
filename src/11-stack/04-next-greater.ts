@@ -3,7 +3,7 @@ function nextGreater (arr: number[]): number[] {
 	const stack: number[] = [];
 
 	for (let i = 0; i < arr.length; i++) {
-		while (stack.length && arr[stack[stack.length - 1]] < arr[i]) {
+		while (stack.length && arr[i] > arr[stack[stack.length - 1]]) {
 			const idx = stack.pop()!;
 			result[idx] = arr[i];
 		}
