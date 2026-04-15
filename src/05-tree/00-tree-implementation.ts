@@ -14,7 +14,7 @@ class TreeNode {
         this.right = (right===undefined ? null : right)
     }
 
-    bfs () {
+    bfs (includeNull = false) {
         let ptr = this as TreeNode;
         const queue: (TreeNode|null)[] = [];
         let log = '';
@@ -24,9 +24,17 @@ class TreeNode {
         while (queue.length) {
             const node = queue.shift();
 
-            if (node) {
-                log += ` -> ${node?.val}`;
-                queue.push(node.left, node.right);
+            if (includeNull) {
+                log += ` -> ${node?.val ?? null}`;
+                if (node) {
+                    queue.push(node?.left ?? null);
+                    queue.push(node?.right ?? null);
+                }
+            } else {
+                if (node) {
+                    log += ` -> ${node?.val}`;
+                    queue.push(node.left, node.right);
+                }
             }
         }
 
